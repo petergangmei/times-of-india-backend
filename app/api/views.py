@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from app.models import Article, Category
 from .serializers import ArticleSerializer, CategorySerializer
 
@@ -33,4 +35,26 @@ class ArticleViewSet(viewsets.ModelViewSet):
         if is_published is not None:
             queryset = queryset.filter(is_published=is_published.lower() == 'true')
         
-        return queryset.order_by('-created_at')
+        return queryset
+
+    @action(detail=True, methods=['get'])
+    def detail(self, request, slug=None):
+        try:
+            article = self.get_object()
+            
+            # Get related articles from the same category
+            related_articles = Article.objects.filter(
+                category=article.category,
+                is_published=True
+            ).exclude(id=article.id)[:5]  # Get 5 related articles
+            
+            # Serialize the data
+            article_data = ArticleSerializer(article).data
+            related_articles_data = ArticleSerializer(related_articles, many=True).data
+            
+            return Response({
+                'article': article_data,
+                'related_articles': related_articles_data
+            })
+        except Article.DoesNotExist:
+            return Response({'error': 'Article not found'}, status=404)
