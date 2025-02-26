@@ -135,7 +135,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # For development, you can uncomment the following to allow all origins
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
     'https://toi2.petergangmei.com',
