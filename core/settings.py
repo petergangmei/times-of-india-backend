@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jw(mn-oykcyobte4s%pm0)o8#*4m_r=$h2fdw*wa-+bw2%z5-8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['toi.petergangmei.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['toi2.petergangmei.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -129,11 +129,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CORS and Security Settings
 CORS_ALLOWED_ORIGINS = [
-    'https://toi.petergangmei.com',
+    'https://toi2.petergangmei.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://toi.petergangmei.com',
+    'https://toi2.petergangmei.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
