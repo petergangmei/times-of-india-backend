@@ -37,8 +37,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         
         return queryset
 
-    @action(detail=True, methods=['get'])
-    def detail(self, request, slug=None):
+    def retrieve(self, request, *args, **kwargs):
         try:
             article = self.get_object()
             
