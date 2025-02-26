@@ -1,5 +1,6 @@
 asgiref==3.8.1
 Django==5.0.2
+django-cors-headers==4.7.0
 djangorestframework==3.14.0
 Faker==36.1.1
 pytz==2025.1
