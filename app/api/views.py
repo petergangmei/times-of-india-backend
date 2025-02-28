@@ -37,6 +37,11 @@ class ArticleViewSet(viewsets.ModelViewSet):
         
         return queryset
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
+
     def retrieve(self, request, *args, **kwargs):
         try:
             article = self.get_object()
@@ -48,8 +53,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
             ).exclude(id=article.id)[:5]  # Get 5 related articles
             
             # Serialize the data
-            article_data = ArticleSerializer(article).data
-            related_articles_data = ArticleSerializer(related_articles, many=True).data
+            article_data = self.get_serializer(article).data
+            related_articles_data = self.get_serializer(related_articles, many=True).data
             
             return Response({
                 'article': article_data,
